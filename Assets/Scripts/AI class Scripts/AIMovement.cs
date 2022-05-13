@@ -9,9 +9,9 @@ public class AIMovement : MonoBehaviour
     //grabs Player transform postion
     public Transform Player;
     //the amount of distance required in order to activate chase 
-    public float chaseDistance;
+    public float chaseDistance = 3;
     //the amount of distance required in order to activate attack
-    public float AtttackDistance;
+    public float AttackDistance = 0.75f;
 
     //an array of GameObjets
     public List<Transform> waypoints;
@@ -113,6 +113,4 @@ public class AIMovement : MonoBehaviour
             transform.position += (Vector3)directionToGoal * speed * Time.deltaTime;
         }
     }
-
-
 }

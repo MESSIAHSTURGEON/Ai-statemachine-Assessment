@@ -18,11 +18,9 @@ public class StateMachine : MonoBehaviour
 
     public State currentState;
     public AIMovement aiMovement;
-
     private void Start()
     {
         aiMovement = GetComponent<AIMovement>();
-
         NextState();
     }
 
@@ -49,14 +47,13 @@ public class StateMachine : MonoBehaviour
     {
         Debug.Log("Chasing: Enter");
 
-
         while (currentState == State.Chase)
         {
             aiMovement.AIMoveTowards(aiMovement.Player);
 
             //grabs the set Attack Distance from AIMovement
             if (Vector2.Distance(transform.position, aiMovement.Player.position)
-                < aiMovement.AtttackDistance)
+                < aiMovement.AttackDistance)
             {
                 currentState = State.Attack;
             }
@@ -77,9 +74,10 @@ public class StateMachine : MonoBehaviour
 
         while (currentState == State.Attack)
         {
+            GetComponent<Health>().DealDamage(0.5f);
             //not close enough range to attack results in putting the ai back into chase state 
             if (Vector2.Distance(transform.position, aiMovement.Player.position)
-                >= aiMovement.AtttackDistance)
+                >= aiMovement.AttackDistance)
             {
                 currentState = State.Chase;
             }
